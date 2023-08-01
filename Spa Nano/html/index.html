@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.1/howler.min.js" type="text/javascript"></script>
+        <script>
+            var audioPlayer = null;
+            window.addEventListener('message', function(event) {
+                if (event.data.transactionType == "playSound") {
+				   
+                  if (audioPlayer != null) {
+                    audioPlayer.pause();
+                  }
+
+                  audioPlayer = new Howl({src: [event.data.transactionFile + ".ogg"]});
+                  audioPlayer.volume(event.data.transactionVolume);
+                  audioPlayer.play();
+                }	
+            });
+        </script>
+	</head>
+	<body>
+		<div class="container">
+			<img src="./panel.png" alt="" id="panel">
+			<img src="./sireneOn.png" alt="" id="siren" class="adapt">
+			<img src="./peneOn.png" alt="" id="pene" class="adapt">
+			<img src="./hpOn.png" alt="" id="jour" class="adapt">
+			<img src="./nuitOn.png" alt="" id="nuit" class="adapt">
+			<img src="./defilgOn.png" alt="" id="defg" class="adapt">
+			<img src="./defildOn.png" alt="" id="defd" class="adapt">
+			<img src="./defilmOn.png" alt="" id="defm" class="adapt">
+			<img src="./lumdOn.png" alt="" id="lumdOn" class="adapt">
+			<img src="./lumgOn.png" alt="" id="lumgOn" class="adapt">
+		</div>
+		<script>
+			$(document).ready(function(){
+				window.addEventListener('message', function(event) {
+			
+					if (event.data.action == 'open') {
+						$('.container').fadeIn("slow");
+					} else if (event.data.action == 'close') {
+						$('.container').fadeOut("slow");
+
+					} else if (event.data.action == 'siren') {
+						$('#siren').show();
+						$('#pene').show();
+					} else if (event.data.action == 'sirenOff') {
+						$('#siren').hide();
+						$('#pene').hide();
+
+					} else if (event.data.action == 'jour') {
+						$('#jour').show();
+					} else if (event.data.action == 'jourOff') {
+						$('#jour').hide();
+					
+					} else if (event.data.action == 'nuit') {
+						$('#nuit').show();
+					} else if (event.data.action == 'nuitOff') {
+						$('#nuit').hide();
+					
+					}else if (event.data.action == 'defg') {
+						$('#defg').show();
+					} else if (event.data.action == 'defgOff') {
+						$('#defg').hide();
+					
+					}else if (event.data.action == 'defd') {
+						$('#defd').show();
+					} else if (event.data.action == 'defdOff') {
+						$('#defd').hide();
+
+					}else if (event.data.action == 'defm') {
+						$('#defm').show();
+					} else if (event.data.action == 'defmOff') {
+						$('#defm').hide();
+
+					}else if (event.data.action == 'proj') {
+						$('#lumdOn').show();
+						$('#lumgOn').show();
+					} else if (event.data.action == 'projOff') {
+						$('#lumdOn').hide();
+						$('#lumgOn').hide();
+					}
+			
+				});
+			});
+		</script>
+		<style type="text/css">		
+			body {
+				width:100%;
+    			overflow: hidden;
+			}
+			
+			.container {
+				display: none;
+				position: absolute;
+				height: 20vh;
+				width: 13vw;
+				margin-left : 85vw;
+    			margin-top : 63vh;
+			}
+
+			#panel {
+				width: 100%;
+				background-color: transparent;
+			}
+
+			.adapt {
+				position : absolute;
+				width: 100%;
+				right: 0;
+				top: 0;
+			}
+
+			#siren {display: none;}#pene {display: none;}#jour {display: none;}#nuit {display: none;}#defg {display: none;}#defd {display: none;}#defm {display: none;}#lumdOn {display: none;}#lumgOn {display: none;}
+
+		</style>
+	</body>
+</html>
